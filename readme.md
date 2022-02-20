@@ -59,4 +59,35 @@ kn service create altair \
 --revision-name=1
 ```
 
+```
+kn service list
+```
+
 Visit the application at the URL printed by the above command.
+
+## Running the same service with different revision name
+
+```
+kn service update altair \
+--env apples=bananas \
+--revision-name=2
+```
+
+Visit the same link as above to see the changes
+
+Now, to view the revision history, use the following command
+
+```
+kn revisions list
+```
+
+You will see that 100% of the traffic is now routed to the new revision.
+You can edit the traffic percentage of the old revision to see the effect.
+
+```
+kn service update altair \
+--traffic altair-1=50 \
+--traffic @latest=50
+```
+
+Now you can view the traffic distribution of the old and new revision by running the revisions command or by refreshing the URL a few times.
