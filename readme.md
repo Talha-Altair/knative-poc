@@ -21,6 +21,16 @@ kubectl patch configmap/config-network \
 kubectl get pods -n knative-serving
 ```
 
+## Install kn cli
+
+```
+wget https://github.com/knative/client/releases/download/knative-v1.2.0/kn-linux-amd64
+mv kn-linux-amd64 kn
+chmod +x kn
+sudo mv kn /usr/games/
+kn version
+```
+
 ## Get External IP
 
 ```
@@ -38,3 +48,15 @@ kubectl patch configmap/config-domain \
   --type merge \
   --patch '{"data":{"knative.talha.com":""}}' 
 ```
+
+## First Sample Service
+
+```
+kn service create altair \
+--image docker.io/talhaabdurrahman/env-tester \
+--port 8500 \
+--env talha=altair \
+--revision-name=1
+```
+
+Visit the application at the URL printed by the above command.
